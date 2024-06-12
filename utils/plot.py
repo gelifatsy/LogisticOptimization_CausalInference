@@ -22,7 +22,7 @@ class Plotter:
         fig = px.pie(a, values='count', names=column, title=title, width=800, height=500)
         fig.show()
 
-    def plotly_plot_hist(self, df, column, color=['cornflowerblue'], title=None):
+    def plotly_plot_hist(self, df, column, color=['teal'], title=None):
         if title == None:
             title=f'Distribution of {column}'
         fig = px.histogram(
@@ -54,7 +54,7 @@ class Plotter:
         fig.update_traces(marker_size=marker_size)
         fig.show()
 
-    def plot_hist(self, df, column, color='cornflowerblue'):
+    def plot_hist(self, df, column, color='teal'):
         sns.displot(data=df, x=column, color=color, kde=True, height=6, aspect=2)
         plt.title(f'Distribution of {column}', size=20, fontweight='bold')
         plt.show()
