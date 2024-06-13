@@ -78,3 +78,28 @@ class DataProcessor:
             return df
         except Exception as e:
             return None
+        
+    def detect_outliers(self, df, column_name):
+        Q1 = df[column_name].quantile(0.25)
+        Q3 = df[column_name].quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        outliers = (df[column_name] < lower_bound) | (df[column_name] > upper_bound)
+        return outliers, lower_bound, upper_bound
+
+    def count_outliers(self, df, column_name):
+        outliers, lower_bound, upper_bound = self.detect_outliers(df, column_name)
+        above_upper_bound = (df[column_name] > upper_bound).sum()
+        below_lower_bound = (df[column_name] < lower_bound).sum()
+        print(f"Lower bound for outliers: {lower_bound:.2f}")
+        print(f"Upper bound for outliers: {upper_bound:.2f}")
+        print(f"Data points above upper bound ({upper_bound:.2f}): {above_upper_bound}")
+        print(f"Data points below lower bound ({lower_bound:.2f}): {below_lower_bound}")
+    
+    def remove_outliers(self, df, column_name):
+        outliers, _, _ = self.detect_outliers(df, column_name)
+        df_clean = df[~outliers]
+        return df_clean
+    
+    
