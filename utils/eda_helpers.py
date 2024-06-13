@@ -10,7 +10,8 @@ class EDA:
         self.requests_df = None
         self.cleaned_trip= None
         self.cleaned_requests= None
-
+        self.preprocessed_trip=None
+        
     def load_data(self):
         trips_file = os.path.join(self.data_dir, 'nb.csv')
         self.trips_df = pd.read_csv(trips_file)
@@ -24,6 +25,9 @@ class EDA:
 
         cleaned_requests = os.path.join(self.data_dir, 'requests_df.csv')
         self.cleaned_requests = pd.read_csv(cleaned_requests)
+        
+        preprocessed_trip = os.path.join(self.data_dir, 'preprocessed_trip.csv')
+        self.preprocessed_trip = pd.read_csv(preprocessed_trip)
     
     # def summary_stats(self):
     #     print("Trips Data Summary:")
