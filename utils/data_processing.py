@@ -2,6 +2,7 @@ import pandas as pd
 from datetime import datetime
 import holidays
 from geopy import distance
+from datetime import date, timedelta
 
 class DataProcessor:
 
@@ -25,6 +26,16 @@ class DataProcessor:
             else: return 0
         except Exception as e:
             return 0
+    def print_holidays_in_year(self, year):
+        holiday_count = 0
+        day = date(year, 1, 1)
+        for n in range(365):
+            if day in self.ng_holidays:
+                print(f"Date: {day.strftime('%Y-%m-%d')}, Holiday: {self.ng_holidays.get(day)}")
+                holiday_count += 1
+            day += timedelta(days=1)
+        print(f"Total number of holidays in {year}: {holiday_count}")
+
 
     def calculate_distances(self, starting_coordinates, ending_coordinates):
         calculated_distances = []
