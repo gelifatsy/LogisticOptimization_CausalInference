@@ -1,3 +1,11 @@
 data
 inference_env/*
 .env
+
+notebook/map.ipynb
+
+notebook/open_weathermap_API .ipynb
+
+utils/open_weathermap.py
+
+utils/route.py
